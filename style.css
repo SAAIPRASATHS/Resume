@@ -539,8 +539,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .bio-avatar {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 }
 .avatar-ring {
   width: 100%; height: 100%;
@@ -550,16 +550,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   animation: spin-slow 8s linear infinite;
 }
 @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.avatar-placeholder {
+.avatar-photo {
   width: 100%; height: 100%;
   border-radius: 50%;
-  background: var(--bg-700);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  color: var(--purple-light);
+  object-fit: cover;
+  display: block;
+  animation: counter-spin 8s linear infinite;
 }
+@keyframes counter-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
 .avatar-glow {
   position: absolute;
   inset: -8px;
