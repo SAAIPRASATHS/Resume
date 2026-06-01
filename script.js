@@ -377,57 +377,46 @@
     const email = document.getElementById('c-email').value;
     const message = document.getElementById('c-message').value;
 
-    fetch('https://api.resend.com/emails', {
+    fetch('https://formsubmit.co/ajax/saaiprasath.s2024aids@sece.ac.in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer re_Q5dqevTn_Ln2bVeJhicAeYJeotLzRRm79'
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
-        from: 'onboarding@resend.dev',
-        to: 'saaiprasath.s2024aids@sece.ac.in',
-        subject: `New Message from ${name} (Portfolio)`,
-        html: `<h3>New Portfolio Message</h3>
-               <p><strong>Name:</strong> ${name}</p>
-               <p><strong>Email:</strong> ${email}</p>
-               <p><strong>Message:</strong></p>
-               <p>${message.replace(/\n/g, '<br>')}</p>`
+        name: name,
+        email: email,
+        message: message,
+        _subject: `New Message from ${name} (Portfolio)`
       })
     })
     .then(response => {
       if (response.ok) {
         return response.json();
       } else {
-        return response.json().then(err => { throw new Error(err.message || 'Server error'); });
+        throw new Error('Server error');
       }
     })
     .then(data => {
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
       feedback.className = 'form-feedback success';
-      feedback.textContent = '✓ Message sent successfully via Resend!';
+      feedback.textContent = '✓ Message sent! Please check your email to activate submissions if this is the first time.';
       form.reset();
-      setTimeout(() => { feedback.textContent = ''; feedback.className = 'form-feedback'; }, 5000);
+      setTimeout(() => { feedback.textContent = ''; feedback.className = 'form-feedback'; }, 6000);
     })
     .catch(error => {
-      console.error('Resend Error:', error);
+      console.error('FormSubmit Error:', error);
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
       
-      // Since Resend has CORS disabled for client-side scripts, handle network error gracefully
-      if (error.name === 'TypeError' || error.message.includes('Failed to fetch')) {
-        feedback.className = 'form-feedback success';
-        feedback.textContent = '✓ Opening email client pre-filled with your message...';
-        
-        // Form pre-fill mailto URL fallback
-        const mailtoUrl = `mailto:saaiprasath.s2024aids@sece.ac.in?subject=New Message from ${encodeURIComponent(name)} (Portfolio)&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
-        window.location.href = mailtoUrl;
-        form.reset();
-      } else {
-        feedback.className = 'form-feedback error';
-        feedback.textContent = `❌ Error: ${error.message}`;
-      }
-      setTimeout(() => { feedback.textContent = ''; feedback.className = 'form-feedback'; }, 8000);
+      // Fallback: Mailto client pre-fill
+      feedback.className = 'form-feedback success';
+      feedback.textContent = '✓ Opening email client pre-filled with your message...';
+      const mailtoUrl = `mailto:saaiprasath.s2024aids@sece.ac.in?subject=New Message from ${encodeURIComponent(name)} (Portfolio)&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
+      window.location.href = mailtoUrl;
+      form.reset();
+      setTimeout(() => { feedback.textContent = ''; feedback.className = 'form-feedback'; }, 6000);
     });
   });
 })();
