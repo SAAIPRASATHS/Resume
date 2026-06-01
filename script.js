@@ -8,7 +8,7 @@
   const ctx = canvas.getContext('2d');
   let W, H, particles = [], animId;
 
-  const COLORS = ['#3b82f6', '#8b5cf6', '#06b6d4', '#a78bfa', '#60a5fa'];
+  const COLORS = ['#3b82f6', '#1d4ed8', '#0284c7', '#0ea5e9', '#60a5fa'];
   const NUM = window.innerWidth < 768 ? 50 : 100;
 
   function resize() {
@@ -43,7 +43,7 @@
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(139,92,246,${0.15 * (1 - dist / 130)})`;
+          ctx.strokeStyle = `rgba(37,99,235,${0.15 * (1 - dist / 130)})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -372,14 +372,63 @@
     const btn = form.querySelector('button[type=submit]');
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    setTimeout(() => {
+
+    const name = document.getElementById('c-name').value;
+    const email = document.getElementById('c-email').value;
+    const message = document.getElementById('c-message').value;
+
+    fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer re_Q5dqevTn_Ln2bVeJhicAeYJeotLzRRm79'
+      },
+      body: JSON.stringify({
+        from: 'onboarding@resend.dev',
+        to: 'saaiprasath.s2024aids@sece.ac.in',
+        subject: `New Message from ${name} (Portfolio)`,
+        html: `<h3>New Portfolio Message</h3>
+               <p><strong>Name:</strong> ${name}</p>
+               <p><strong>Email:</strong> ${email}</p>
+               <p><strong>Message:</strong></p>
+               <p>${message.replace(/\n/g, '<br>')}</p>`
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json().then(err => { throw new Error(err.message || 'Server error'); });
+      }
+    })
+    .then(data => {
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
       feedback.className = 'form-feedback success';
-      feedback.textContent = '✓ Message sent! I will get back to you soon.';
+      feedback.textContent = '✓ Message sent successfully via Resend!';
       form.reset();
       setTimeout(() => { feedback.textContent = ''; feedback.className = 'form-feedback'; }, 5000);
-    }, 1800);
+    })
+    .catch(error => {
+      console.error('Resend Error:', error);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+      
+      // Since Resend has CORS disabled for client-side scripts, handle network error gracefully
+      if (error.name === 'TypeError' || error.message.includes('Failed to fetch')) {
+        feedback.className = 'form-feedback success';
+        feedback.textContent = '✓ Opening email client pre-filled with your message...';
+        
+        // Form pre-fill mailto URL fallback
+        const mailtoUrl = `mailto:saaiprasath.s2024aids@sece.ac.in?subject=New Message from ${encodeURIComponent(name)} (Portfolio)&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
+        window.location.href = mailtoUrl;
+        form.reset();
+      } else {
+        feedback.className = 'form-feedback error';
+        feedback.textContent = `❌ Error: ${error.message}`;
+      }
+      setTimeout(() => { feedback.textContent = ''; feedback.className = 'form-feedback'; }, 8000);
+    });
   });
 })();
 
@@ -412,4 +461,83 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   }, { passive: true });
 })();
 
-console.log('%c✨ Saaiprasath S Portfolio — Built with passion & code', 'color:#8b5cf6;font-size:14px;font-weight:700;');
+/* ==========================================
+   ACHIEVEMENT GALLERY FILTER
+   ========================================== */
+(function () {
+  const btns = document.querySelectorAll('.gallery-tabs .tab-btn');
+  const items = document.querySelectorAll('.gallery-item');
+  if (btns.length === 0) return;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        const cat = item.dataset.category || '';
+        if (filter === 'all' || cat === filter) {
+          item.style.display = '';
+          item.style.opacity = '0';
+          item.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            item.style.transition = 'all 0.4s cubic-bezier(0.4,0,0.2,1)';
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+          }, 20);
+        } else {
+          item.style.opacity = '0';
+          item.style.transform = 'scale(0.9)';
+          setTimeout(() => { item.style.display = 'none'; }, 400);
+        }
+      });
+    });
+  });
+})();
+
+/* ==========================================
+   ACHIEVEMENT GALLERY LIGHTBOX
+   ========================================== */
+(function () {
+  const lightbox = document.getElementById('gallery-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.querySelector('.lightbox-close');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  if (!lightbox) return;
+
+  galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const src = item.getAttribute('data-src');
+      const title = item.getAttribute('data-title') || '';
+      const desc = item.getAttribute('data-desc') || '';
+      lightbox.style.display = 'block';
+      lightboxImg.src = src;
+      const caption = document.getElementById('lightbox-caption');
+      if (caption) {
+        caption.innerHTML = `<h4 style="color:#ffffff;font-size:1.2rem;margin-bottom:6px;font-weight:700;">${title}</h4><p style="color:#94a3b8;font-size:0.9rem;margin:0;">${desc}</p>`;
+      }
+      document.body.style.overflow = 'hidden'; // Disable background scrolling
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Enable scrolling
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === lightboxClose) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.style.display === 'block') {
+      closeLightbox();
+    }
+  });
+})();
+
+console.log('%c✨ Saaiprasath S Portfolio — Built with passion & code', 'color:#2563eb;font-size:14px;font-weight:700;');
+
