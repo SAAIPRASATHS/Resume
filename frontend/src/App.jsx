@@ -425,8 +425,9 @@ export default function App() {
     setFeedback({ text: '', type: '' });
 
     try {
-      // Connect directly to local Node express backend microservice on port 5000
-      const response = await fetch('http://localhost:5000/api/contact', {
+      // Connect directly to backend microservice (supports VITE_API_BASE_URL environment variable)
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiBaseUrl}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -442,7 +443,8 @@ export default function App() {
         setEmail('');
         setMessage('');
       } else {
-        throw new Error(resData.error || 'Server rejected request');
+        // Display backend error directly on the UI
+        setFeedback({ text: `❌ Server Error: ${resData.error || 'Failed to dispatch email.'}`, type: 'error' });
       }
     } catch (err) {
       console.warn('Backend server connection failed, launching local pre-filled mailto backup...', err);
@@ -455,7 +457,9 @@ export default function App() {
       setMessage('');
     } finally {
       setSending(false);
-      setTimeout(() => setFeedback({ text: '', type: '' }), 6000);
+      setTimeout(() => {
+        setFeedback((prev) => prev.type === 'success' ? { text: '', type: '' } : prev);
+      }, 8000);
     }
   };
 

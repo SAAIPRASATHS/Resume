@@ -29,7 +29,7 @@ app.post('/api/contact', async (req, res) => {
   }
 
   try {
-    const data = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: process.env.RECIPIENT_EMAIL || 'saaiprasath.s2024aids@sece.ac.in',
       subject: `New Message from ${name} (Portfolio)`,
@@ -48,6 +48,11 @@ app.post('/api/contact', async (req, res) => {
         </div>
       `
     });
+
+    if (error) {
+      console.error('Resend API Error:', error);
+      return res.status(400).json({ success: false, error: error.message || 'Failed to send email.' });
+    }
 
     console.log('Email sent successfully:', data);
     res.status(200).json({ success: true, message: 'Email sent successfully!', id: data.id });
