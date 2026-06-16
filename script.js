@@ -528,5 +528,38 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 })();
 
+/* ==========================================
+   INTRO VIDEO MODAL
+   ========================================== */
+(function () {
+  const modal      = document.getElementById('intro-video-modal');
+  const video      = document.getElementById('intro-video');
+  const openBtn    = document.getElementById('open-intro-video');
+  const closeBtn   = document.getElementById('close-intro-video');
+  const backdrop   = document.getElementById('intro-modal-backdrop');
+  if (!modal || !openBtn) return;
+
+  function openModal() {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Delay play so animation can settle
+    setTimeout(() => { if (video) video.play().catch(() => {}); }, 300);
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (video) { video.pause(); }
+  }
+
+  openBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+})();
+
 console.log('%c✨ Saaiprasath S Portfolio — Built with passion & code', 'color:#2563eb;font-size:14px;font-weight:700;');
 

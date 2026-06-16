@@ -70,6 +70,10 @@
         <a href="SAAIPRASATH S (5).pdf" target="_blank" rel="noopener" class="btn btn-secondary" id="download-resume">
           <i class="fas fa-file-pdf"></i> Resume
         </a>
+        <button class="btn btn-video-intro" id="open-intro-video" aria-label="Watch My Self Introduction Video">
+          <span class="video-play-ring"><i class="fas fa-play"></i></span>
+          Watch My Intro
+        </button>
         <a href="#contact" class="btn btn-outline">
           <i class="fas fa-paper-plane"></i> Contact Me
         </a>
@@ -899,6 +903,45 @@
     <span class="lightbox-close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" alt="Enlarged Achievement">
     <div id="lightbox-caption"></div>
+  </div>
+
+  <!-- ====== VIDEO INTRO MODAL ====== -->
+  <div id="intro-video-modal" class="intro-modal" role="dialog" aria-modal="true" aria-label="Self Introduction Video">
+    <div class="intro-modal-backdrop" id="intro-modal-backdrop"></div>
+    <div class="intro-modal-content">
+      <button class="intro-modal-close" id="close-intro-video" aria-label="Close video">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="intro-video-wrapper">
+        <div class="intro-video-label">
+          <span class="intro-badge-dot"></span>
+          <span>Self Introduction</span>
+        </div>
+        <video
+          id="intro-video"
+          class="intro-video"
+          src="Saai Tech.mp4"
+          controls
+          preload="none"
+          poster="profile.jpg"
+          aria-label="Saaiprasath S Self Introduction Video"
+        >
+          Your browser does not support the video tag.
+        </video>
+        <div class="intro-video-footer">
+          <div class="intro-author">
+            <img src="profile.jpg" alt="Saaiprasath S" class="intro-author-img" />
+            <div>
+              <strong>Saaiprasath S</strong>
+              <span>AI &amp; Data Science Engineer</span>
+            </div>
+          </div>
+          <a href="SAAIPRASATH S (5).pdf" target="_blank" rel="noopener" class="btn btn-primary intro-resume-btn">
+            <i class="fas fa-file-pdf"></i> Download Resume
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Back to Top Button -->
