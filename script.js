@@ -542,8 +542,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   function openModal() {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    // Delay play so animation can settle
-    setTimeout(() => { if (video) video.play().catch(() => {}); }, 300);
+    if (video) {
+      video.play().catch(e => console.log('Autoplay blocked:', e));
+    }
   }
 
   function closeModal() {
