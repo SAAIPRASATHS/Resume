@@ -85,6 +85,17 @@ const PROJECTS = [
     github: 'https://github.com/SAAIPRASATHS/KPI-LAPTOP-MONTORING-SYSTEM',
     demo: 'https://kpi-laptop-montoring-system-upnzrmdut8wsdcruv8gpae.streamlit.app',
     featured: false
+  },
+  {
+    category: 'ai web',
+    src: 'Screenshot 2026-06-16 091152.png',
+    title: 'Multilingual Loan Advisor',
+    subtitle: 'AI-Powered Financial Guidance Platform',
+    desc: 'An intelligent loan advisory platform with multilingual voice & text support, real-time eligibility checking, AI-driven financial education, and dual-role access for borrowers and agents.',
+    tech: ['React.js', 'Node.js', 'Groq AI', 'PostgreSQL', 'Multilingual NLP'],
+    github: 'https://github.com/VRaghav1806/loan_agent',
+    demo: 'https://loan-agent-omega.vercel.app/',
+    featured: true
   }
 ];
 
@@ -592,7 +603,7 @@ export default function App() {
               </p>
               <div className="bio-stats">
                 <div className="bio-stat">
-                  <span className="stat-num">3+</span>
+                  <span className="stat-num">4+</span>
                   <span className="stat-label">Projects</span>
                 </div>
                 <div className="bio-stat">
