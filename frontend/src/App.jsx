@@ -529,7 +529,7 @@ export default function App() {
             <a href="#projects" className="btn btn-primary">
               <i className="fas fa-rocket"></i> View Projects
             </a>
-            <a href="SAAIPRASATH S (3).pdf" target="_blank" rel="noopener" className="btn btn-secondary" id="download-resume">
+            <a href="SAAIPRASATH S (5).pdf" target="_blank" rel="noopener" className="btn btn-secondary" id="download-resume">
               <i className="fas fa-file-pdf"></i> Resume
             </a>
             <a href="#contact" className="btn btn-outline">
