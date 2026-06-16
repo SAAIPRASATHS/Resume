@@ -145,6 +145,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   // --- TYPING ANIMATION STATES ---
   const [typedText, setTypedText] = useState('');
@@ -200,6 +201,28 @@ export default function App() {
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  // ==========================================
+  // EFFECT: INTRO VIDEO MODAL HANDLERS
+  // ==========================================
+  useEffect(() => {
+    if (isVideoOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isVideoOpen) {
+        setIsVideoOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isVideoOpen]);
 
   // ==========================================
   // EFFECT: SCROLL PROGRESS, SCROLLED NAV & PARALLAX
@@ -529,9 +552,13 @@ export default function App() {
             <a href="#projects" className="btn btn-primary">
               <i className="fas fa-rocket"></i> View Projects
             </a>
-            <a href="SAAIPRASATH S (5).pdf" target="_blank" rel="noopener" className="btn btn-secondary" id="download-resume">
+            <a href="SAAIPRASATH S (5).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" id="download-resume">
               <i className="fas fa-file-pdf"></i> Resume
             </a>
+            <button className="btn btn-video-intro" onClick={() => setIsVideoOpen(true)} aria-label="Watch My Self Introduction Video">
+              <span className="video-play-ring"><i className="fas fa-play"></i></span>
+              Watch My Intro
+            </button>
             <a href="#contact" className="btn btn-outline">
               <i className="fas fa-paper-plane"></i> Contact Me
             </a>
@@ -1180,6 +1207,48 @@ export default function App() {
       <button id="back-to-top" className={`back-to-top ${showBackToTop ? 'visible' : ''}`} aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
         <i className="fas fa-chevron-up"></i>
       </button>
+      {/* ====== INTRO VIDEO MODAL ====== */}
+      {isVideoOpen && (
+        <div className="intro-modal active">
+          <div className="intro-modal-backdrop" onClick={() => setIsVideoOpen(false)}></div>
+          <div className="intro-modal-content">
+            <button className="intro-modal-close" onClick={() => setIsVideoOpen(false)} aria-label="Close video">
+              <i className="fas fa-times"></i>
+            </button>
+            <div className="intro-video-wrapper">
+              <div className="intro-video-label">
+                <span className="intro-badge-dot"></span>
+                <span>Self Introduction</span>
+              </div>
+              <video
+                id="intro-video"
+                className="intro-video"
+                src="saai-tech.mp4"
+                controls
+                playsInline
+                preload="metadata"
+                poster="profile.jpg"
+                autoPlay
+                aria-label="Saaiprasath S Self Introduction Video"
+              >
+                Your browser does not support the video tag.
+              </video>
+              <div className="intro-video-footer">
+                <div className="intro-author">
+                  <img src="profile.jpg" alt="Saaiprasath S" className="intro-author-img" />
+                  <div>
+                    <strong>Saaiprasath S</strong>
+                    <span>AI & Data Science Engineer</span>
+                  </div>
+                </div>
+                <a href="SAAIPRASATH S (5).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
+                  <i className="fas fa-download"></i> Resume
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
