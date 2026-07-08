@@ -1,9 +1,9 @@
 /* ===== DESIGN TOKENS ===== */
 :root {
-  --bg-900: #ffffff;
-  --bg-800: #f8fafc;
-  --bg-700: #f1f5f9;
-  --bg-600: #e2e8f0;
+  --bg-900: #00bfff;
+  --bg-800: #00bfff;
+  --bg-700: #00bfff;
+  --bg-600: #00bfff;
 
   --blue: #2563eb;
   --blue-light: #3b82f6;
