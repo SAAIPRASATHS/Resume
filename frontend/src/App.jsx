@@ -289,7 +289,7 @@ export default function App() {
   const triggerStatsCounter = () => {
     const duration = 1800;
     const start = performance.now();
-    const targets = { skillrack: 720, leetcode: 90, rating: 1458, hackerrank: 1 };
+    const targets = { skillrack: 720, leetcode: 130, rating: 1458, hackerrank: 1 };
 
     const frame = (now) => {
       const elapsed = now - start;
@@ -552,7 +552,7 @@ export default function App() {
             <a href="#projects" className="btn btn-primary">
               <i className="fas fa-rocket"></i> View Projects
             </a>
-            <a href="SAAIPRASATH S (5).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" id="download-resume">
+            <a href="SAAIPRASATH S (7).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" id="download-resume">
               <i className="fas fa-file-pdf"></i> Resume
             </a>
             <button className="btn btn-video-intro" onClick={() => setIsVideoOpen(true)} aria-label="Watch My Self Introduction Video">
@@ -652,7 +652,7 @@ export default function App() {
                     <span className="tl-year">2023 – Present</span>
                     <h4>B.Tech — Artificial Intelligence & Data Science</h4>
                     <p>Sri Eshwar College of Engineering</p>
-                    <div className="tl-badge">CGPA: 7.74</div>
+                    <div className="tl-badge">CGPA: 8.0</div>
                   </div>
                 </div>
                 <div className="timeline-item">
@@ -1241,7 +1241,7 @@ export default function App() {
                     <span>AI & Data Science Engineer</span>
                   </div>
                 </div>
-                <a href="SAAIPRASATH S (5).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
+                <a href="SAAIPRASATH S (7).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
                   <i className="fas fa-download"></i> Resume
                 </a>
               </div>
