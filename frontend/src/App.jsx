@@ -588,6 +588,7 @@ export default function App() {
           <div className="hero-orb orb-1"></div>
           <div className="hero-orb orb-2"></div>
           <div className="hero-orb orb-3"></div>
+          <img src="hero-profile.jpg" alt="Saaiprasath S" className="hero-image" />
           <div className="floating-card card-1 reveal-right">
             <i className="fas fa-brain"></i>
             <span>AI Engineer</span>
