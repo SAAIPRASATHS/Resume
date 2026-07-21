@@ -353,7 +353,7 @@ export default function App() {
     const ctx = canvas.getContext('2d');
     let W, H, animId;
     let particles = [];
-    const COLORS = ['#3b82f6', '#1d4ed8', '#0284c7', '#0ea5e9', '#60a5fa'];
+    const COLORS = ['#22c55e', '#16a34a', '#4ade80', '#15803d', '#86efac'];
     const NUM = window.innerWidth < 768 ? 40 : 80;
 
     const resize = () => {
@@ -532,6 +532,11 @@ export default function App() {
 
       {/* ====== HERO SECTION ====== */}
       <section id="hero" className="hero-section">
+        <div className="hero-photo-bg">
+          <img src="ChatGPT Image Jul 21, 2026, 03_21_19 PM.png" alt="Saaiprasath S" className="hero-photo-img" />
+          <div className="hero-photo-overlay"></div>
+        </div>
+
         <div className="hero-content">
           <div className="hero-badge reveal-up">
             <span className="badge-dot"></span>
@@ -584,11 +589,8 @@ export default function App() {
             </a>
           </div>
         </div>
-        <div className="hero-visual">
-          <div className="hero-orb orb-1"></div>
-          <div className="hero-orb orb-2"></div>
-          <div className="hero-orb orb-3"></div>
-          <img src="hero-profile.jpg" alt="Saaiprasath S" className="hero-image" />
+        
+        <div className="hero-badges-float">
           <div className="floating-card card-1 reveal-right">
             <i className="fas fa-brain"></i>
             <span>AI Engineer</span>
