@@ -46,14 +46,19 @@
 
   <!-- ====== HERO SECTION ====== -->
   <section id="hero" class="hero-section">
+    <!-- Profile photo fills right side as background-like element -->
+    <div class="hero-photo-bg">
+      <img src="ChatGPT Image Jul 21, 2026, 03_21_19 PM.png" alt="Saaiprasath S" class="hero-photo-img" />
+      <div class="hero-photo-overlay"></div>
+    </div>
+
     <div class="hero-content">
       <div class="hero-badge reveal-up">
         <span class="badge-dot"></span>
         <span>Open to Opportunities</span>
       </div>
       <h1 class="hero-name reveal-up">
-        <span class="name-first">Saaiprasath S</span>
-        
+        Hi, my name is <span class="name-first">Saaiprasath S</span>
       </h1>
       <div class="hero-typing reveal-up">
         <span class="typing-prefix">I am a </span>
@@ -61,7 +66,8 @@
         <span class="cursor">|</span>
       </div>
       <p class="hero-tagline reveal-up">
-        Building intelligent AI platforms that solve real-world problems<br/>and improve community resilience.
+        Building intelligent AI platforms that solve real-world problems
+        and improve community resilience.
       </p>
       <div class="hero-buttons reveal-up">
         <a href="#projects" class="btn btn-primary">
@@ -97,24 +103,23 @@
         </a>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-orb orb-1"></div>
-      <div class="hero-orb orb-2"></div>
-      <div class="hero-orb orb-3"></div>
-      <img src="hero-profile.jpg" alt="Saaiprasath S" class="hero-image" />
-      <div class="floating-card card-1 reveal-right">
+
+    <!-- Floating badge cards (desktop) -->
+    <div class="hero-badges-float">
+      <div class="floating-card card-1">
         <i class="fas fa-brain"></i>
         <span>AI Engineer</span>
       </div>
-      <div class="floating-card card-2 reveal-right">
+      <div class="floating-card card-2">
         <i class="fas fa-trophy"></i>
         <span>Hackathon Finalist</span>
       </div>
-      <div class="floating-card card-3 reveal-right">
+      <div class="floating-card card-3">
         <i class="fas fa-chart-line"></i>
         <span>Data Analytics</span>
       </div>
     </div>
+
     <div class="scroll-indicator">
       <div class="scroll-mouse">
         <div class="scroll-wheel"></div>
@@ -673,7 +678,7 @@
               <i class="fas fa-bolt stat-icon"></i>
             </div>
           </div>
-          <div class="stat-counter" data-target="130" data-suffix="+">0+</div>
+          <div class="stat-counter" data-target="140" data-suffix="+">0+</div>
           <div class="stat-label">LeetCode Problems</div>
           <div class="stat-platform"><i class="fas fa-circle-dot"></i> LeetCode</div>
         </div>
@@ -921,10 +926,9 @@
         <video
           id="intro-video"
           class="intro-video"
-          src="saai-tech.mp4"
           controls
           playsinline
-          preload="metadata"
+          preload="none"
           poster="profile.jpg"
           aria-label="Saaiprasath S Self Introduction Video"
         >

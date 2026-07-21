@@ -8,7 +8,7 @@
   const ctx = canvas.getContext('2d');
   let W, H, particles = [], animId;
 
-  const COLORS = ['#3b82f6', '#1d4ed8', '#0284c7', '#0ea5e9', '#60a5fa'];
+  const COLORS = ['#22c55e', '#16a34a', '#4ade80', '#15803d', '#86efac'];
   const NUM = window.innerWidth < 768 ? 50 : 100;
 
   function resize() {
@@ -529,28 +529,40 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 })();
 
 /* ==========================================
-   INTRO VIDEO MODAL
+   INTRO VIDEO MODAL — Lazy Load
    ========================================== */
 (function () {
-  const modal      = document.getElementById('intro-video-modal');
-  const video      = document.getElementById('intro-video');
-  const openBtn    = document.getElementById('open-intro-video');
-  const closeBtn   = document.getElementById('close-intro-video');
-  const backdrop   = document.getElementById('intro-modal-backdrop');
+  const modal    = document.getElementById('intro-video-modal');
+  const video    = document.getElementById('intro-video');
+  const openBtn  = document.getElementById('open-intro-video');
+  const closeBtn = document.getElementById('close-intro-video');
+  const backdrop = document.getElementById('intro-modal-backdrop');
   if (!modal || !openBtn) return;
+
+  let videoLoaded = false;
 
   function openModal() {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    if (video && !videoLoaded) {
+      // Lazy-inject the src only on first open — prevents 13MB download on page load
+      video.src = 'saai-tech.mp4';
+      video.load();
+      videoLoaded = true;
+    }
+
     if (video) {
-      video.play().catch(e => console.log('Autoplay blocked:', e));
+      video.play().catch(e => console.log('Autoplay blocked (user gesture required):', e));
     }
   }
 
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
-    if (video) { video.pause(); }
+    if (video) {
+      video.pause();
+    }
   }
 
   openBtn.addEventListener('click', openModal);
