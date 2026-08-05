@@ -49,6 +49,12 @@ const GALLERY_ITEMS = [
     src: 'WhatsApp Image 2026-06-01 at 12.25.05 PM.jpeg',
     title: 'Exhibition Project Demo',
     desc: 'Live application showcase showing active interface widgets to tech enthusiasts and guests.'
+  },
+  {
+    category: 'awards',
+    src: 'agentverse-crown-award.jpeg',
+    title: 'AgentVerse 2026 Crown Award',
+    desc: 'First Prize (Crown Award) winner at AgentVerse 2026 — Agentic AI Hackathon held at Sri Eshwar College of Engineering. Received ₹15,000 prize money and trophy.'
   }
 ];
 
@@ -289,7 +295,7 @@ export default function App() {
   const triggerStatsCounter = () => {
     const duration = 1800;
     const start = performance.now();
-    const targets = { skillrack: 720, leetcode: 130, rating: 1458, hackerrank: 1 };
+    const targets = { skillrack: 720, leetcode: 150, rating: 1499, hackerrank: 1 };
 
     const frame = (now) => {
       const elapsed = now - start;
@@ -911,6 +917,17 @@ export default function App() {
                 <p>Department Level Exhibition</p>
               </div>
               <div className="ach-glow" style={{ background: 'linear-gradient(135deg,rgba(251,191,36,0.08),rgba(234,179,8,0.05))' }}></div>
+            </div>
+            <div className="achievement-card glass-card reveal-up" style={{ '--delay': '0.7s' }}>
+              <div className="ach-icon" style={{ background: 'rgba(168,85,247,0.15)', borderColor: 'rgba(168,85,247,0.35)', color: '#e9d5ff' }}>
+                <i className="fas fa-crown"></i>
+              </div>
+              <div className="ach-content">
+                <span className="ach-badge first">1st Prize</span>
+                <h4>AgentVerse 2026</h4>
+                <p>Agentic AI Hackathon — Crown Award</p>
+              </div>
+              <div className="ach-glow" style={{ background: 'linear-gradient(135deg,rgba(168,85,247,0.08),rgba(139,92,246,0.05))' }}></div>
             </div>
           </div>
 
