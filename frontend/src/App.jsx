@@ -102,6 +102,18 @@ const PROJECTS = [
     github: 'https://github.com/VRaghav1806/loan_agent',
     demo: 'https://loan-agent-omega.vercel.app/',
     featured: true
+  },
+  {
+    category: 'ai',
+    src: 'Screenshot 2026-10-27 084642.png',
+    title: 'HelioSync — Industrial Fire Classification',
+    subtitle: 'Satellite Geospatial Intelligence · Sep 2026',
+    desc: 'Near-real-time pipeline over NASA FIRMS (NOAA-21, NOAA-20, Suomi-NPP) fusing ESA WorldCover, WRI/OSM facility data and multi-day persistence into 65 engineered features, classifying 43,346 hotspots with a Random Forest. Results published to a MapLibre 2D / CesiumJS 3D dashboard with priority ranking.',
+    tech: ['Python', 'Random Forest', 'NASA FIRMS', 'MapLibre', 'CesiumJS', 'PostGIS'],
+    github: 'https://github.com/SAAIPRASATHS/sih2026',
+    demo: 'https://helio-sync-alpha.vercel.app/',
+    featured: true,
+    badge: 'SIH 2026'
   }
 ];
 
@@ -142,6 +154,13 @@ const CERTIFICATIONS = [
     issuer: 'Professional Course',
     badge: 'Completed',
     icon: 'fas fa-code-branch'
+  },
+  {
+    title: 'Data Fundamentals',
+    issuer: 'IBM SkillsBuild · OCT 2026',
+    badge: 'Certified',
+    isIbm: true,
+    icon: 'fas fa-database'
   }
 ];
 
@@ -295,7 +314,7 @@ export default function App() {
   const triggerStatsCounter = () => {
     const duration = 1800;
     const start = performance.now();
-    const targets = { skillrack: 720, leetcode: 150, rating: 1499, hackerrank: 1 };
+    const targets = { skillrack: 720, leetcode: 189, rating: 1693, hackerrank: 1 };
 
     const frame = (now) => {
       const elapsed = now - start;
@@ -563,7 +582,7 @@ export default function App() {
             <a href="#projects" className="btn btn-primary">
               <i className="fas fa-rocket"></i> View Projects
             </a>
-            <a href="SAAIPRASATH S (7).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" id="download-resume">
+            <a href="Saaiprasath_S_Data_Analytics_Resume (1).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" id="download-resume">
               <i className="fas fa-file-pdf"></i> Resume
             </a>
             <button className="btn btn-video-intro" onClick={() => setIsVideoOpen(true)} aria-label="Watch My Self Introduction Video">
@@ -812,7 +831,7 @@ export default function App() {
                 <div className="project-img-wrap">
                   <img src={p.src} alt={p.title} className="project-screenshot" />
                   <div className="project-overlay">
-                    <span className={`project-status ${p.featured ? 'live' : ''}`}>{p.featured ? 'Featured' : 'System'}</span>
+                    <span className={`project-status ${p.featured ? 'live' : ''}`}>{p.badge || (p.featured ? 'Featured' : 'System')}</span>
                   </div>
                 </div>
                 <div className="project-content">
@@ -1090,7 +1109,7 @@ export default function App() {
                   <div className="cert-icon"><i className={cert.icon}></i></div>
                   <h4>{cert.title}</h4>
                   <p className="cert-issuer">{cert.issuer}</p>
-                  <div className={`cert-badge ${cert.isNptel ? 'cert-badge--nptel' : ''}`}>{cert.badge}</div>
+                  <div className={`cert-badge ${cert.isNptel ? 'cert-badge--nptel' : ''} ${cert.isIbm ? 'cert-badge--ibm' : ''}`}>{cert.badge}</div>
                 </div>
               ))}
             </div>
@@ -1261,7 +1280,7 @@ export default function App() {
                     <span>AI & Data Science Engineer</span>
                   </div>
                 </div>
-                <a href="SAAIPRASATH S (7).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
+                <a href="Saaiprasath_S_Data_Analytics_Resume (1).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
                   <i className="fas fa-download"></i> Resume
                 </a>
               </div>

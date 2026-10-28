@@ -1202,6 +1202,26 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   0% { left: -100%; }
   50%, 100% { left: 200%; }
 }
+.cert-badge--ibm {
+  background: linear-gradient(135deg, rgba(15,98,254,0.12), rgba(0,62,181,0.18));
+  border-color: rgba(15,98,254,0.35);
+  color: #0f62fe;
+  box-shadow: 0 0 10px rgba(15,98,254,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.cert-badge--ibm::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: ibm-shine 3s infinite;
+}
+@keyframes ibm-shine {
+  0% { left: -100%; }
+  50%, 100% { left: 200%; }
+}
 .cert-slider-wrap {
   position: relative;
 }
